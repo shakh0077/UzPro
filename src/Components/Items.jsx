@@ -193,7 +193,7 @@ const ImportFromChina = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handleResize = () => {
@@ -202,8 +202,6 @@ const ImportFromChina = () => {
         setMobileMenuOpen(false);
       }
     };
- 
-
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -442,56 +440,63 @@ const ImportFromChina = () => {
           </div>
         </div>
         {mobileMenuOpen && (
-  <div className="md:hidden bg-white border-t">
-    <div className="flex justify-between">
-      <nav className="flex flex-col space-y-2 p-4">
-        <a
-          href="#home"
-          onClick={() => setActiveSection('home')}
-          className={`py-2 text-gray-600 hover:text-blue-500 ${
-            activeSection === 'home' ? 'font-bold text-blue-600 underline' : ''
-          }`}
-        >
-          Bosh sahifa
-        </a>
-        <a
-          href="#product"
-          onClick={() => setActiveSection('product')}
-          className={`py-2 text-gray-600 hover:text-blue-500 ${
-            activeSection === 'product' ? 'font-bold text-blue-600 underline' : ''
-          }`}
-        >
-          Mahsulotlar
-        </a>
-        <a
-          href="#service"
-          onClick={() => setActiveSection('service')}
-          className={`py-2 text-gray-600 hover:text-blue-500 ${
-            activeSection === 'service' ? 'font-bold text-blue-600 underline' : ''
-          }`}
-        >
-          Biz haqimizda
-        </a>
-        <a
-          href="#contact"
-          onClick={() => setActiveSection('contact')}
-          className={`py-2 text-gray-600 hover:text-blue-500 ${
-            activeSection === 'contact' ? 'font-bold text-blue-600 underline' : ''
-          }`}
-        >
-          Aloqa
-        </a>
-      </nav>
-      <button
-        onClick={() => setMobileMenuOpen(false)}
-        className="text-red-600 flex justify-center items-center text-xl mr-3 font-extrabold mt-3 w-9 h-9  "
-      >
-        x
-      </button>
-    </div>
-  </div>
-)}
-
+          <div className="md:hidden bg-white border-t">
+            <div className="flex justify-between">
+              <nav className="flex flex-col space-y-2 p-4">
+                <a
+                  href="#home"
+                  onClick={() => setActiveSection("home")}
+                  className={`py-2 text-gray-600 hover:text-blue-500 ${
+                    activeSection === "home"
+                      ? "font-bold text-blue-600 underline"
+                      : ""
+                  }`}
+                >
+                  Bosh sahifa
+                </a>
+                <a
+                  href="#product"
+                  onClick={() => setActiveSection("product")}
+                  className={`py-2 text-gray-600 hover:text-blue-500 ${
+                    activeSection === "product"
+                      ? "font-bold text-blue-600 underline"
+                      : ""
+                  }`}
+                >
+                  Mahsulotlar
+                </a>
+                <a
+                  href="#service"
+                  onClick={() => setActiveSection("service")}
+                  className={`py-2 text-gray-600 hover:text-blue-500 ${
+                    activeSection === "service"
+                      ? "font-bold text-blue-600 underline"
+                      : ""
+                  }`}
+                >
+                  Biz haqimizda
+                </a>
+                <a
+                  href="#contact"
+                  onClick={() => setActiveSection("contact")}
+                  className={`py-2 text-gray-600 hover:text-blue-500 ${
+                    activeSection === "contact"
+                      ? "font-bold text-blue-600 underline"
+                      : ""
+                  }`}
+                >
+                  Aloqa
+                </a>
+              </nav>
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-red-600 flex justify-center items-center text-xl mr-3 font-extrabold mt-3 w-9 h-9  "
+              >
+                x
+              </button>
+            </div>
+          </div>
+        )}
       </header>
 
       <main id="home" className="container mx-auto px-4  py-8">
@@ -552,7 +557,7 @@ const ImportFromChina = () => {
           </div>
 
           {/* Products Grid */}
-          <div  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
@@ -816,60 +821,74 @@ const ImportFromChina = () => {
                 </div>
 
                 <div className="p-4 border-t">
-  <div className="flex justify-between mb-4">
-    <span className="font-bold">Jami:</span>
-    <span className="font-bold text-blue-500">
-      {cart.reduce((sum, item) => sum + item.price, 0)} TB
-    </span>
-  </div>
-  <button 
-    className="w-full cursor-pointer bg-blue-500 text-white py-3 rounded-md font-medium hover:bg-blue-500 transition"
-    onClick={async () => {
-      try {
-        // 1. Buyurtma ma'lumotlarini tayyorlash
-        const orderDetails = cart.map(item => 
-          `${item.name} - ${item.price} TB x ${item.quantity} = ${item.price * item.quantity} TB`
-        ).join('\n');
-        
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const message = `📦 Yangi buyurtma:\n\n${orderDetails}\n\n💰 Jami: ${total} TB`;
-        
-        // 2. Telegram bot orqali xabar yuborish
-        const botToken = '7330849668:AAH6-V7mMPu9Rha2infXYwBQ7zbVDRRbHe0';
-        const chatId = '7426153375';
-        
-        const response = await fetch(
-          `https://api.telegram.org/bot${botToken}/sendMessage`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              chat_id: chatId,
-              text: message,
-            }),
-          }
-        );
-        
-        const result = await response.json();
-        
-        if (result.ok) {
-          alert('Buyurtmangiz qabul qilindi! Tez orada siz bilan bog\'lanamiz.');
-          // Savatni tozalash
-          setCart([]);
-        } else {
-          alert('Xatolik yuz berdi. Iltimos, qayta urunib ko\'ring.');
-        }
-      } catch (error) {
-        console.error('Xatolik:', error);
-        alert('Xatolik yuz berdi. Iltimos, qayta urunib ko\'ring.');
-      }
-    }}
-  >
-    Buyurtma berish
-  </button>
-</div>
+                  <div className="flex justify-between mb-4">
+                    <span className="font-bold">Jami:</span>
+                    <span className="font-bold text-blue-500">
+                      {cart.reduce((sum, item) => sum + item.price, 0)} TB
+                    </span>
+                  </div>
+                  <button
+                    className="w-full cursor-pointer bg-blue-500 text-white py-3 rounded-md font-medium hover:bg-blue-500 transition"
+                    onClick={async () => {
+                      try {
+                        // 1. Buyurtma ma'lumotlarini tayyorlash
+                        const orderDetails = cart
+                          .map(
+                            (item) =>
+                              `${item.name} - ${item.price} TB x ${
+                                item.quantity
+                              } = ${item.price * item.quantity} TB`
+                          )
+                          .join("\n");
+
+                        const total = cart.reduce(
+                          (sum, item) => sum + item.price * item.quantity,
+                          0
+                        );
+                        const message = `📦 Yangi buyurtma:\n\n${orderDetails}\n\n💰 Jami: ${total} TB`;
+
+                        // 2. Telegram bot orqali xabar yuborish
+                        const botToken = "7330849668:AAH6-V7mMPu9Rha2infXYwBQ7zbVDRRbHe0";
+                        const chatId = "7426153375";
+
+                        const response = await fetch(
+                          `https://api.telegram.org/bot${botToken}/sendMessage`,
+                          {
+                            method: "POST",
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                              chat_id: chatId,
+                              text: message,
+                            }),
+                          }
+                        );
+
+                        const result = await response.json();
+
+                        if (result.ok) {
+                          alert(
+                            "Buyurtmangiz qabul qilindi! Tez orada siz bilan bog'lanamiz."
+                          );
+                          // Savatni tozalash
+                          setCart([]);
+                        } else {
+                          alert(
+                            "Xatolik yuz berdi. Iltimos, qayta urunib ko'ring."
+                          );
+                        }
+                      } catch (error) {
+                        console.error("Xatolik:", error);
+                        alert(
+                          "Xatolik yuz berdi. Iltimos, qayta urunib ko'ring."
+                        );
+                      }
+                    }}
+                  >
+                    Buyurtma berish
+                  </button>
+                </div>
               </>
             )}
           </div>
@@ -963,7 +982,7 @@ const ImportFromChina = () => {
                 </a>
               </div>
               <div className="mt-3">
-              <TelegramEmailForm/>
+                <TelegramEmailForm />
               </div>
             </div>
           </div>
