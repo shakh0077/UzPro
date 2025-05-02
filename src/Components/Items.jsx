@@ -13,7 +13,6 @@ import Acer from "../assets/Acer.png";
 import Poco3 from "../assets/Poco3.png";
 import A35 from "../assets/A35.png";
 import Iphone11 from "../assets/Iphone11.png";
-import Box from "../assets/box.svg";
 
 const ImportFromChina = () => {
   const [products, setProducts] = useState([
@@ -842,11 +841,6 @@ const ImportFromChina = () => {
                   Aloqa
                 </a>
               </nav>
-
-
-
-
-
             </div>
             <div>
               <h4 className="text-xl font-bold mb-4">O'zbekistondan Buyurtma</h4>
