@@ -202,6 +202,7 @@ const ImportFromChina = () => {
         setMobileMenuOpen(false);
       }
     };
+ 
 
 
     window.addEventListener("resize", handleResize);
@@ -815,16 +816,60 @@ const ImportFromChina = () => {
                 </div>
 
                 <div className="p-4 border-t">
-                  <div className="flex justify-between mb-4">
-                    <span className="font-bold">Jami:</span>
-                    <span className="font-bold text-blue-500">
-                      {cart.reduce((sum, item) => sum + item.price, 0)} TB
-                    </span>
-                  </div>
-                  <button className="w-full bg-blue-500 text-white py-3 rounded-md font-medium hover:bg-blue-500 transition">
-                    Buyurtma berish
-                  </button>
-                </div>
+  <div className="flex justify-between mb-4">
+    <span className="font-bold">Jami:</span>
+    <span className="font-bold text-blue-500">
+      {cart.reduce((sum, item) => sum + item.price, 0)} TB
+    </span>
+  </div>
+  <button 
+    className="w-full cursor-pointer bg-blue-500 text-white py-3 rounded-md font-medium hover:bg-blue-500 transition"
+    onClick={async () => {
+      try {
+        // 1. Buyurtma ma'lumotlarini tayyorlash
+        const orderDetails = cart.map(item => 
+          `${item.name} - ${item.price} TB x ${item.quantity} = ${item.price * item.quantity} TB`
+        ).join('\n');
+        
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const message = `📦 Yangi buyurtma:\n\n${orderDetails}\n\n💰 Jami: ${total} TB`;
+        
+        // 2. Telegram bot orqali xabar yuborish
+        const botToken = '7330849668:AAH6-V7mMPu9Rha2infXYwBQ7zbVDRRbHe0';
+        const chatId = '7426153375';
+        
+        const response = await fetch(
+          `https://api.telegram.org/bot${botToken}/sendMessage`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              chat_id: chatId,
+              text: message,
+            }),
+          }
+        );
+        
+        const result = await response.json();
+        
+        if (result.ok) {
+          alert('Buyurtmangiz qabul qilindi! Tez orada siz bilan bog\'lanamiz.');
+          // Savatni tozalash
+          setCart([]);
+        } else {
+          alert('Xatolik yuz berdi. Iltimos, qayta urunib ko\'ring.');
+        }
+      } catch (error) {
+        console.error('Xatolik:', error);
+        alert('Xatolik yuz berdi. Iltimos, qayta urunib ko\'ring.');
+      }
+    }}
+  >
+    Buyurtma berish
+  </button>
+</div>
               </>
             )}
           </div>
