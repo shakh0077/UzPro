@@ -13,7 +13,7 @@ import Acer from "../assets/Acer.png";
 import Poco3 from "../assets/Poco3.png";
 import A35 from "../assets/A35.png";
 import Iphone11 from "../assets/Iphone11.png";
-
+import TelegramEmailForm from "../pages/Tg";
 const ImportFromChina = () => {
   const [products, setProducts] = useState([
     {
@@ -193,6 +193,7 @@ const ImportFromChina = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     const handleResize = () => {
@@ -201,6 +202,7 @@ const ImportFromChina = () => {
         setMobileMenuOpen(false);
       }
     };
+
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -240,7 +242,7 @@ const ImportFromChina = () => {
     if (!product) return null;
 
     return (
-      <div className="fixed inset-0 bg-lime-700/20 backdrop-blur-sm bg-opacity-75 z-50 flex items-center justify-center p-4">
+      <div className="fixed inset-0 bg-blue-700/20 backdrop-blur-sm bg-opacity-75 z-50 flex items-center justify-center p-4">
         <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
           <div className="p-6">
             <div className="flex justify-between items-start mb-4">
@@ -284,7 +286,7 @@ const ImportFromChina = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-medium text-gray-500">Price</h4>
-                    <p className="text-lg font-bold text-lime-600">
+                    <p className="text-lg font-bold text-blue-600">
                       {product.price} {product.unit}
                     </p>
                   </div>
@@ -298,7 +300,7 @@ const ImportFromChina = () => {
                   className={`w-full py-3 rounded-md font-medium text-white ${
                     product.inCart
                       ? "bg-red-500 hover:bg-red-600"
-                      : "bg-lime-500 hover:bg-lime-600"
+                      : "bg-blue-500 hover:bg-blue-600"
                   }`}
                 >
                   {product.inCart ? "Remove from Cart" : "Add to Cart"}
@@ -312,15 +314,15 @@ const ImportFromChina = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-black shadow-sm sticky top-0 z-50">
+      <header className="bg-white shadow-lg sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center">
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden mr-4 text-gray-600 hover:text-lime-500"
+                className="md:hidden mr-4 text-gray-600 hover:text-blue-500"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -340,13 +342,13 @@ const ImportFromChina = () => {
 
               <a
                 href="#"
-                className="text-2xl flex items-center md:text-3xl font-bold text-lime-500"
+                className="text-2xl flex items-center md:text-3xl font-bold text-red-500"
               >
-                <span className="text-3xl md:text-4xl font-serif text-white font-semibold">
+                <span className="text-3xl md:text-4xl font-serif text-blue-500 font-semibold">
                   U
                 </span>
-                <span className="text-white">z</span>
-                <span className="text-xl md:text-3xl text-lime-500 font-serif">
+                <span className="text-blue-500">z</span>
+                <span className="text-xl md:text-3xl text-red-500 font-serif">
                   P
                 </span>
                 ro
@@ -358,25 +360,25 @@ const ImportFromChina = () => {
               <nav className="flex space-x-6">
                 <a
                   href="#home"
-                  className="text-lime-500 text-xl font-semibold hover:text-white"
+                  className="text-blue-500 text-xl font-semibold hover:text-red-500"
                 >
                   Bosh sahifa
                 </a>
                 <a
                   href="#product"
-                  className="text-lime-500 text-xl font-semibold hover:text-white"
+                  className="text-blue-500 text-xl font-semibold hover:text-red-500"
                 >
                   Mahsulotlar
                 </a>
                 <a
                   href="#service"
-                  className="text-lime-500 text-xl font-semibold hover:text-white"
+                  className="text-blue-500 text-xl font-semibold hover:text-red-500"
                 >
                   Biz haqimizda
                 </a>
                 <a
                   href="#contact"
-                  className="text-lime-500 text-xl font-semibold hover:text-white"
+                  className="text-blue-500 text-xl font-semibold hover:text-red-500"
                 >
                   Aloqa
                 </a>
@@ -385,7 +387,7 @@ const ImportFromChina = () => {
               <div className="flex items-center space-x-4">
                 <button
                   onClick={() => setShowCart(true)}
-                  className="relative cursor-pointer p-2 text-lime-500 hover:text-white"
+                  className="relative cursor-pointer p-2 text-blue-500 hover:text-red-500"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -413,7 +415,7 @@ const ImportFromChina = () => {
             <div className="flex md:hidden items-center space-x-4">
               <button
                 onClick={() => setShowCart(true)}
-                className="relative p-2 text-gray-600 hover:text-lime-500"
+                className="relative p-2 text-gray-600 hover:text-blue-500"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -438,45 +440,57 @@ const ImportFromChina = () => {
             </div>
           </div>
         </div>
-
         {mobileMenuOpen && (
-          <div className="md:hidden bg-white border-t">
-            <div className="flex justify-between">
-              <nav className="flex flex-col space-y-2 p-4">
-                <a
-                  href="#home"
-                  className="text-gray-600 hover:text-lime-500 py-2"
-                >
-                  Bosh sahifa
-                </a>
-                <a
-                  href="#product"
-                  className="text-gray-600 hover:text-lime-500 py-2"
-                >
-                  Mahsulotlar
-                </a>
-                <a
-                  href="#service"
-                  className="text-gray-600 hover:text-lime-500 py-2"
-                >
-                  Biz haqimizda
-                </a>
-                <a
-                  href="#contact"
-                  className="text-gray-600 hover:text-lime-500 py-2"
-                >
-                  Aloqa
-                </a>
-              </nav> 
-              <button
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-white flex justify-center items-center text-xl mr-3 font-extrabold mt-3 w-10 h-10 rounded-full bg-lime-500"
-              >
-                x
-              </button>
-            </div>
-          </div>
-        )}
+  <div className="md:hidden bg-white border-t">
+    <div className="flex justify-between">
+      <nav className="flex flex-col space-y-2 p-4">
+        <a
+          href="#home"
+          onClick={() => setActiveSection('home')}
+          className={`py-2 text-gray-600 hover:text-blue-500 ${
+            activeSection === 'home' ? 'font-bold text-blue-600 underline' : ''
+          }`}
+        >
+          Bosh sahifa
+        </a>
+        <a
+          href="#product"
+          onClick={() => setActiveSection('product')}
+          className={`py-2 text-gray-600 hover:text-blue-500 ${
+            activeSection === 'product' ? 'font-bold text-blue-600 underline' : ''
+          }`}
+        >
+          Mahsulotlar
+        </a>
+        <a
+          href="#service"
+          onClick={() => setActiveSection('service')}
+          className={`py-2 text-gray-600 hover:text-blue-500 ${
+            activeSection === 'service' ? 'font-bold text-blue-600 underline' : ''
+          }`}
+        >
+          Biz haqimizda
+        </a>
+        <a
+          href="#contact"
+          onClick={() => setActiveSection('contact')}
+          className={`py-2 text-gray-600 hover:text-blue-500 ${
+            activeSection === 'contact' ? 'font-bold text-blue-600 underline' : ''
+          }`}
+        >
+          Aloqa
+        </a>
+      </nav>
+      <button
+        onClick={() => setMobileMenuOpen(false)}
+        className="text-red-600 flex justify-center items-center text-xl mr-3 font-extrabold mt-3 w-9 h-9  "
+      >
+        x
+      </button>
+    </div>
+  </div>
+)}
+
       </header>
 
       <main id="home" className="container mx-auto px-4  py-8">
@@ -502,7 +516,7 @@ const ImportFromChina = () => {
                 style={{
                   fontSize: "25px",
                   display: "inline-block",
-                  color: "lime",
+                  color: "blue",
                 }}
                 repeat={Infinity}
               />
@@ -515,7 +529,7 @@ const ImportFromChina = () => {
               onClick={() => setSelectedBrand(null)}
               className={`px-4 cursor-pointer py-2 rounded-md ${
                 !selectedBrand
-                  ? "bg-lime-500 text-white"
+                  ? "bg-blue-500 text-white"
                   : "bg-gray-200 text-gray-700 hover:bg-gray-300"
               }`}
             >
@@ -527,7 +541,7 @@ const ImportFromChina = () => {
                 onClick={() => setSelectedBrand(brand)}
                 className={`px-4 py-2 cursor-pointer  rounded-md ${
                   selectedBrand === brand
-                    ? "bg-lime-500 text-white"
+                    ? "bg-blue-500 text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
               >
@@ -537,7 +551,7 @@ const ImportFromChina = () => {
           </div>
 
           {/* Products Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
@@ -598,7 +612,7 @@ const ImportFromChina = () => {
                         </tr>
                         <tr>
                           <td className="py-1 text-gray-600">Narxi:</td>
-                          <td className="py-1 font-bold text-lime-500">
+                          <td className="py-1 font-bold text-blue-500">
                             {product.price} {product.unit}
                           </td>
                         </tr>
@@ -621,7 +635,7 @@ const ImportFromChina = () => {
                     className={`w-full cursor-pointer mt-4 py-2 rounded-md font-medium transition ${
                       product.inCart
                         ? "bg-red-100 text-red-600 hover:bg-red-200"
-                        : "bg-lime-500 text-white hover:bg-lime-600"
+                        : "bg-blue-500 text-white hover:bg-blue-600"
                     }`}
                   >
                     {product.inCart ? "Remove from Cart" : "Add to Cart"}
@@ -635,7 +649,7 @@ const ImportFromChina = () => {
         {/* Here Brand */}
         <div
           id="service"
-          className="bg-gradient-to-br mb-5 from-lime-700 via-lime-500 to-lime-900 px-4 py-8 md:px-8 md:py-12 rounded-2xl"
+          className="bg-gradient-to-br mb-5 from-blue-700 via-blue-500 to-blue-900 px-4 py-8 md:px-8 md:py-12 rounded-2xl"
         >
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white font-bold font-serif max-w-xl text-center md:text-left">
@@ -647,7 +661,7 @@ const ImportFromChina = () => {
             </h3>
           </div>
           <div className="mt-8 flex justify-center md:justify-start">
-            <button className="bg-white text-lime-600 hover:text-white hover:bg-lime-600 transition-all duration-300 px-6 py-3 rounded-2xl font-bold text-lg md:text-xl">
+            <button className="bg-white cursor-pointer text-blue-600 hover:text-white hover:bg-blue-600 transition-all duration-300 px-6 py-3 rounded-2xl font-bold text-lg md:text-xl">
               Hoziroq xarid qiling
             </button>
           </div>
@@ -655,7 +669,7 @@ const ImportFromChina = () => {
 
         {/* Additional Sections */}
         <section className="">
-          <h2 className="text-2xl font-bold text-lime-500 mb-6">
+          <h2 className="text-2xl font-bold text-blue-500 mb-6">
             <TypeAnimation
               sequence={[
                 "Bizni Hizmatlardan foydalaning Biz siz uchun harakatdamiz..",
@@ -672,27 +686,27 @@ const ImportFromChina = () => {
               style={{
                 fontSize: "25px",
                 display: "inline-block",
-                color: "lime",
+                color: "blue",
               }}
               repeat={Infinity}
             />
           </h2>
           <div className="bg-white rounded-lg shadow-md p-6">
-            <p className="text-lime-600 mb-4">
+            <p className="text-blue-600 mb-4">
               Biz Xitoydan to'g'ridan-to'g'ri import qilish imkoniyatini taqdim
               etamiz. Mahsulotlarimiz original va sifatli bo'lib, eng yaxshi
               narxlarda taqdim etiladi.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-lime-500 text-white p-4 rounded-lg">
+              <div className="bg-blue-500 text-white p-4 rounded-lg">
                 <h3 className="font-bold text-lg mb-2">Tez Yetkazib Berish</h3>
                 <p className="">7-14 ish kunida yetkazib beramiz</p>
               </div>
-              <div className="bg-lime-500 text-white p-4 rounded-lg">
+              <div className="bg-blue-500 text-white p-4 rounded-lg">
                 <h3 className="font-bold text-lg mb-2">Original Mahsulotlar</h3>
                 <p className="">Faqat sertifikatlangan tovarlar</p>
               </div>
-              <div className="bg-lime-500 text-white p-4 rounded-lg">
+              <div className="bg-blue-500 text-white p-4 rounded-lg">
                 <h3 className="font-bold text-lg mb-2">Qo'llab-quvvatlash</h3>
                 <p className="">24/7 mijozlarga xizmat</p>
               </div>
@@ -711,7 +725,7 @@ const ImportFromChina = () => {
 
       {/* Shopping Cart Sidebar */}
       {showCart && (
-        <div className="fixed inset-0 bg-lime-700/50 backdrop-blur-sm bg-opacity-50 z-50 flex justify-end">
+        <div className="fixed inset-0 bg-blue-700/50 backdrop-blur-sm bg-opacity-50 z-50 flex justify-end">
           <div className="bg-white w-full max-w-md h-full overflow-y-auto">
             <div className="p-4 border-b flex justify-between items-center">
               <h3 className="text-xl font-bold">Savat ({cart.length})</h3>
@@ -755,7 +769,7 @@ const ImportFromChina = () => {
                 <p className="text-gray-500">Savat bo'sh</p>
                 <button
                   onClick={() => setShowCart(false)}
-                  className="mt-4 bg-lime-500 text-white px-6 py-2 rounded-md hover:bg-lime-500 transition"
+                  className="mt-4 bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-500 transition"
                 >
                   Mahsulotlarni ko'rish
                 </button>
@@ -773,7 +787,7 @@ const ImportFromChina = () => {
                         <p className="text-gray-500 text-sm">{item.brand}</p>
                       </div>
                       <div className="flex items-center">
-                        <p className="text-lime-500 font-semibold mr-4">
+                        <p className="text-blue-500 font-semibold mr-4">
                           {item.price} {item.unit}
                         </p>
                         <button
@@ -803,11 +817,11 @@ const ImportFromChina = () => {
                 <div className="p-4 border-t">
                   <div className="flex justify-between mb-4">
                     <span className="font-bold">Jami:</span>
-                    <span className="font-bold text-lime-500">
+                    <span className="font-bold text-blue-500">
                       {cart.reduce((sum, item) => sum + item.price, 0)} TB
                     </span>
                   </div>
-                  <button className="w-full bg-lime-500 text-white py-3 rounded-md font-medium hover:bg-lime-500 transition">
+                  <button className="w-full bg-blue-500 text-white py-3 rounded-md font-medium hover:bg-blue-500 transition">
                     Buyurtma berish
                   </button>
                 </div>
@@ -818,7 +832,7 @@ const ImportFromChina = () => {
       )}
 
       {/* Footer */}
-      <footer className="bg-black text-lime-500 py-8">
+      <footer className="bg-black text-blue-500 py-8">
         <div id="#contact" className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
@@ -902,6 +916,9 @@ const ImportFromChina = () => {
                     <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
                   </svg>
                 </a>
+              </div>
+              <div className="mt-3">
+              <TelegramEmailForm/>
               </div>
             </div>
           </div>
