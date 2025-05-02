@@ -357,25 +357,25 @@ const ImportFromChina = () => {
             <div className="hidden md:flex items-center space-x-6">
               <nav className="flex space-x-6">
                 <a
-                  href="#"
+                  href="#home"
                   className="text-lime-500 text-xl font-semibold hover:text-white"
                 >
                   Bosh sahifa
                 </a>
                 <a
-                  href="#"
+                  href="#product"
                   className="text-lime-500 text-xl font-semibold hover:text-white"
                 >
                   Mahsulotlar
                 </a>
                 <a
-                  href="#"
+                  href="#service"
                   className="text-lime-500 text-xl font-semibold hover:text-white"
                 >
                   Biz haqimizda
                 </a>
                 <a
-                  href="#"
+                  href="#contact"
                   className="text-lime-500 text-xl font-semibold hover:text-white"
                 >
                   Aloqa
@@ -441,45 +441,50 @@ const ImportFromChina = () => {
 
         {mobileMenuOpen && (
           <div className="md:hidden bg-white border-t">
-            <nav className="flex flex-col space-y-2 p-4">
-              <a
-                href="#home"
-                className="text-gray-600 hover:text-lime-500 py-2"
+            <div className="flex justify-between">
+              <nav className="flex flex-col space-y-2 p-4">
+                <a
+                  href="#home"
+                  className="text-gray-600 hover:text-lime-500 py-2"
+                >
+                  Bosh sahifa
+                </a>
+                <a
+                  href="#product"
+                  className="text-gray-600 hover:text-lime-500 py-2"
+                >
+                  Mahsulotlar
+                </a>
+                <a
+                  href="#service"
+                  className="text-gray-600 hover:text-lime-500 py-2"
+                >
+                  Biz haqimizda
+                </a>
+                <a
+                  href="#contact"
+                  className="text-gray-600 hover:text-lime-500 py-2"
+                >
+                  Aloqa
+                </a>
+              </nav> 
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-white flex justify-center items-center text-xl mr-3 font-extrabold mt-3 w-10 h-10 rounded-full bg-lime-500"
               >
-                Bosh sahifa
-              </a>
-              <a
-                href="#product"
-                className="text-gray-600 hover:text-lime-500 py-2"
-              >
-                Mahsulotlar
-              </a>
-              <a
-                href="#service"
-                className="text-gray-600 hover:text-lime-500 py-2"
-              >
-                Biz haqimizda
-              </a>
-              <a
-                href="contact"
-                className="text-gray-600 hover:text-lime-500 py-2"
-              >
-                Aloqa
-              </a>
-              <button className="w-full bg-lime-500 text-white px-4 py-2 rounded-md hover:bg-lime-500 transition mt-2">
-                Kirish
+                x
               </button>
-            </nav>
+            </div>
           </div>
         )}
       </header>
 
-      <main className="container mx-auto px-4  py-8">
+      <main id="home" className="container mx-auto px-4  py-8">
         {/* Hero Section */}
         <Slider />
 
         <section className="mb-12">
-          <div className="flex justify-between items-center mb-6">
+          <div id="product" className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-bold text-gray-800">
               <TypeAnimation
                 sequence={[
@@ -606,6 +611,7 @@ const ImportFromChina = () => {
                   </div>
 
                   <button
+                    id="product"
                     onClick={(e) => {
                       e.stopPropagation();
                       product.inCart
@@ -627,7 +633,10 @@ const ImportFromChina = () => {
         </section>
 
         {/* Here Brand */}
-        <div className="bg-gradient-to-br mb-5 from-lime-700 via-lime-500 to-lime-900 px-4 py-8 md:px-8 md:py-12 rounded-2xl">
+        <div
+          id="service"
+          className="bg-gradient-to-br mb-5 from-lime-700 via-lime-500 to-lime-900 px-4 py-8 md:px-8 md:py-12 rounded-2xl"
+        >
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white font-bold font-serif max-w-xl text-center md:text-left">
               Biz bilan qoling. Sizning ishonchingizni oqlaymiz albatta! Har bir
@@ -815,7 +824,7 @@ const ImportFromChina = () => {
             <div>
               <h2 className="text-xl font-bold mb-4">Biz haqimizda</h2>
 
-            <nav className="flex flex-col">
+              <nav className="flex flex-col">
                 <a
                   href="#"
                   className="text-gray-300 text-xl font-semibold hover:text-white"
@@ -843,17 +852,19 @@ const ImportFromChina = () => {
               </nav>
             </div>
             <div>
-              <h4 className="text-xl font-bold mb-4">O'zbekistondan Buyurtma</h4>
+              <h4 className="text-xl font-bold mb-4">
+                O'zbekistondan Buyurtma
+              </h4>
               <p className="text-gray-300">
                 Eng yaxshi narxlarda original mahsulotlar. Sizdan ishonch va
                 harakat Bizdan natija!
               </p>
             </div>
-            <div>
+            <div id="contact">
               <h4 className="text-lg font-bold mb-4">Aloqa</h4>
               <ul className="space-y-2">
                 <li className="text-gray-300">
-                  <a href="902640680">+998 90 264 06 80</a>
+                  <a href="9026406 80">+998 90 264 06 80</a>
                 </li>
                 <li className="text-gray-300">UzPro@UzPro.uz</li>
                 <li className="text-gray-300">
