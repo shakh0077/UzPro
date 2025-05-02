@@ -853,7 +853,7 @@ const ImportFromChina = () => {
               <h4 className="text-lg font-bold mb-4">Aloqa</h4>
               <ul className="space-y-2">
                 <li className="text-gray-300">
-                  <a href="+998 90 264 06 80">+998 90 264 06 80</a>
+                  <a href="902640680">+998 90 264 06 80</a>
                 </li>
                 <li className="text-gray-300">UzPro@UzPro.uz</li>
                 <li className="text-gray-300">
